@@ -11,5 +11,16 @@ module Clearwater
 
       expect(html).to eq('<div id="foo" class="bar"><p>baz</p></div>')
     end
+
+    it 'converts styles into strings' do
+      html = component.div({
+        style: {
+          font_size: '24px',
+          padding: '3px',
+        }
+      }, "Hello world!").to_s
+
+      expect(html).to eq('<div style="font-size:24px;padding:3px">Hello world!</div>')
+    end
   end
 end

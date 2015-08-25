@@ -165,7 +165,7 @@ module Clearwater
         html = "<#{@tag_name}"
         if @attributes
           @attributes.each do |attr, value|
-            html << " #{attr}=#{CGI.escape(value).inspect}"
+            html << " #{attr}=#{value.to_s.inspect}"
           end
         end
         if @content
@@ -196,6 +196,13 @@ module Clearwater
         # Note: `class_name` is still allowed
         if attributes.key? :class_name or attributes.key? :className
           attributes[:class] ||= attributes.delete(:class_name) || attributes.delete(:className)
+        end
+
+        if Hash === attributes[:style]
+          attributes[:style] = attributes[:style].map { |attr, value|
+            attr = attr.to_s.tr('_', '-')
+            "#{attr}:#{value}"
+          }.join(';')
         end
 
         attributes.each do |key, handler|
