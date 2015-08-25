@@ -141,6 +141,9 @@ module Clearwater
       html
     end
 
+    def outlet
+    end
+
     def params
       router.params_for_path(router.current_path)
     end
