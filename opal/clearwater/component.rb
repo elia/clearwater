@@ -1,5 +1,4 @@
 require 'clearwater/virtual_dom'
-require 'set'
 
 module Clearwater
   module Component

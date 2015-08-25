@@ -1,5 +1,6 @@
 require "opal"
 require "opal/browser"
+require "clearwater/component"
 
 module Clearwater
   require_relative "clearwater/version"
