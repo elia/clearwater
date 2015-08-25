@@ -1,5 +1,3 @@
-require 'cgi'
-
 module Clearwater
   module Component
     def render
