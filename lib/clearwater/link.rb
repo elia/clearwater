@@ -9,6 +9,6 @@ class Link
   end
 
   def render
-    a(attributes, content)
+    a(@attributes, @content)
   end
 end

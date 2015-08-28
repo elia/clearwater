@@ -1,5 +1,13 @@
 module Clearwater
   module Component
+    def self.included klass
+      def klass.attributes *attrs
+        attr_accessor *attrs
+      end
+    end
+    attr_accessor :outlet
+    attr_accessor :router
+
     def render
     end
 
@@ -123,8 +131,7 @@ module Clearwater
     end
 
     def tag tag_name, attributes=nil, content=nil
-      case attributes
-      when Array, Component, Numeric, String
+      unless attributes.nil? || attributes.is_a?(Hash)
         content = attributes
         attributes = nil
       end
@@ -139,9 +146,6 @@ module Clearwater
       end
 
       html
-    end
-
-    def outlet
     end
 
     def params
@@ -193,8 +197,6 @@ module Clearwater
       def sanitize_attributes attributes
         return attributes unless attributes.is_a? Hash
 
-        # Allow specifying `class` instead of `class_name`.
-        # Note: `class_name` is still allowed
         if attributes.key? :class_name or attributes.key? :className
           attributes[:class] ||= attributes.delete(:class_name) || attributes.delete(:className)
         end
@@ -216,7 +218,12 @@ module Clearwater
       end
 
       def sanitize_content content
-        content
+        case content
+        when Array
+          content.map { |c| sanitize_content c }.join
+        else
+          content.to_s
+        end
       end
     end
   end

@@ -1,7 +1,9 @@
 #!/usr/bin/env ruby
 
-lib = File.expand_path(File.join("..", "lib"), __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+%w(lib shared).each do |dir|
+  path = File.expand_path(File.join("..", dir), __FILE__)
+  $LOAD_PATH.unshift(path) unless $LOAD_PATH.include?(path)
+end
 require "clearwater/version"
 
 Gem::Specification.new do |spec|
