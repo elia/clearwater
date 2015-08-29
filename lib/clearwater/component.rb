@@ -163,7 +163,7 @@ module Clearwater
       def initialize tag_name, attributes=nil, content=nil
         @tag_name = tag_name
         @attributes = sanitize_attributes(attributes)
-        @content = sanitize_content(content)
+        @content = content
       end
 
       def to_html
@@ -173,9 +173,9 @@ module Clearwater
             html << " #{attr}=#{value.to_s.inspect}"
           end
         end
-        if !@content.empty?
+        if @content
           html << '>'
-          html << html_content
+          html << sanitize_content(@content)
           html << "</#{@tag_name}>"
         else
           html << '/>'
@@ -184,15 +184,6 @@ module Clearwater
         html
       end
       alias to_s to_html
-
-      def html_content content=@content
-        case content
-        when Tag, Numeric, String, NilClass
-          content.to_s
-        when Array
-          content.map { |c| html_content c }.join
-        end
-      end
 
       def sanitize_attributes attributes
         return attributes unless attributes.is_a? Hash
