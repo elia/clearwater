@@ -173,7 +173,7 @@ module Clearwater
             html << " #{attr}=#{value.to_s.inspect}"
           end
         end
-        if @content
+        if !@content.empty?
           html << '>'
           html << html_content
           html << "</#{@tag_name}>"
