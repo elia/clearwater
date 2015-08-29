@@ -3,6 +3,7 @@ require "opal/browser"
 require "clearwater/component"
 require 'clearwater/link'
 require 'clearwater/router'
+require 'clearwater/application'
 
 module Clearwater
   require_relative "clearwater/version"
