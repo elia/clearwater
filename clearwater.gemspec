@@ -16,7 +16,7 @@ Gem::Specification.new do |spec|
   spec.homepage = "https://clearwater-rb.github.io/"
   spec.license = "MIT"
 
-  spec.files = Dir[File.join("lib", "**", "*"), File.join("opal", "**", "*")]
+  spec.files = Dir[File.join("lib", "**", "*"), File.join("opal", "**", "*"), File.join("shared", "**", "*")]
   spec.executables = Dir[File.join("bin", "**", "*")].map! { |f| f.gsub(/bin\//, "") }
   spec.test_files = Dir[File.join("test", "**", "*"), File.join("spec", "**", "*")]
   spec.require_paths = ["lib"]
